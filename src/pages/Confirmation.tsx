@@ -28,7 +28,7 @@ export function Confirmation() {
     
             <View style={styles.footer}>
               <Button 
-              title="Começar"
+                title="Começar"
               />
             </View>
           </View>
