@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  SafeAreaView,
-  Text,
-  Image,
+  Image, SafeAreaView,
+  StyleSheet, Text,
   TouchableOpacity,
-  StyleSheet,
+  Dimensions
 } from "react-native";
-
 import wateringImg from "../assets/watering.png";
-import { Button } from "../components/Buttom";
 import colors from "../styles/colors";
 
-export function Welcome() {
-  const [visible, setVisible] = useState(false);
 
-  function handleVisibility() {
-    setVisible(true);
-  }
+export function Welcome() {
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,17 +19,21 @@ export function Welcome() {
         de forma mais fácil
       </Text>
 
-      
-      {
-          visible &&
-          <Image source={wateringImg} style={styles.image} />
-      }
-      
+      <Image 
+      source={wateringImg} 
+      style={styles.image} 
+      resizeMode="contain"/>
+
       <Text style={styles.subtitle}>
         Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
         sempre que precisar.
       </Text>
-      <Button title=">" onPress={handleVisibility} />
+
+      <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+        <Text style={styles.buttontext}>
+          >
+        </Text>
+    </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -45,7 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   title: {
     fontSize: 32,
@@ -60,6 +57,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     color: colors.heading,
   },
+  image: {
+    height: Dimensions.get('window').width * 0.7
+  },
   button: {
     backgroundColor: colors.green,
     justifyContent: "center",
@@ -68,10 +68,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 56,
     width: 56,
-  },
-  image: {
-    width: 292,
-    height: 284,
   },
   buttontext: {
     color: colors.white,
