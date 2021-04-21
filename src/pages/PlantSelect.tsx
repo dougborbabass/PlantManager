@@ -36,10 +36,26 @@ interface PlantProps {
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
+  const [environmentSelected, setEnvironmentSelected] = useState("all");
+
+  function handleEnvironmenteSelected(environment: string) {
+    setEnvironmentSelected(environment);
+
+    if (environment === "all") return setFilteredPlants(plants);
+
+    const filtered = plants.filter((plant) =>
+      plant.environments.includes(environment)
+    );
+
+    setFilteredPlants(filtered);
+  }
 
   useEffect(() => {
     async function fetchEnvironment() {
-      const { data } = await api.get("plants_environments");
+      const { data } = await api.get(
+        "plants_environments?_sort=title&_order=asc"
+      );
 
       setEnvironments([
         {
@@ -55,11 +71,11 @@ export function PlantSelect() {
 
   useEffect(() => {
     async function fetchPlants() {
-      const { data } = await api.get('plants');
-      setPlants(data)
+      const { data } = await api.get("plants?_sort=name&_order=asc");
+      setPlants(data);
     }
     fetchPlants();
-  },[])
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -76,6 +92,8 @@ export function PlantSelect() {
           renderItem={({ item }) => (
             <EnvironmentButton
               title={item.title}
+              active={item.key === environmentSelected}
+              onPress={() => handleEnvironmenteSelected(item.key)}
             />
           )}
           horizontal
@@ -88,11 +106,10 @@ export function PlantSelect() {
 
       <View style={styles.plants}>
         <FlatList
-          data={plants}
-          renderItem={( { item }) => (
-            <PlantCardPrimary data={item}/>
-          )}
-          
+          data={filteredPlants}
+          renderItem={({ item }) => <PlantCardPrimary data={item} />}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
         />
       </View>
     </View>
