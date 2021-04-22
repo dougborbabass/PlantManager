@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { SvgFromUri } from "react-native-svg";
 
@@ -11,17 +11,26 @@ interface PlantProps extends RectButtonProps {
   data: {
     name: string;
     photo: string;
+    hour: string;
   };
 }
 
-export const PlantCardPrimary = ({ data, ...rest }: PlantProps) => {
+export const PlantCardSecundary = ({ data, ...rest }: PlantProps) => {
   return (
     <RectButton style={styles.container} {...rest}>
       <SvgFromUri 
         uri={data.photo} 
-        width={70} 
-        height={70} />
-      <Text style={styles.texto}>{data.name}</Text>
+        width={50} 
+        height={50} />
+      <Text style={styles.title}>{data.name}</Text>
+      <View style={styles.details}>
+        <Text style={styles.timeLable}>
+          Regas às
+        </Text>
+        <Text style={styles.time}>
+          {data.hour}
+        </Text>
+      </View>
     </RectButton>
   );
 };
@@ -29,16 +38,34 @@ export const PlantCardPrimary = ({ data, ...rest }: PlantProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    maxWidth: "45%",
-    backgroundColor: colors.shape,
+    width: '100%',
+    paddingHorizontal: 10,
+    paddingVertical: 25,
     borderRadius: 20,
-    paddingVertical: 10,
-    alignItems: "center",
-    margin: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+    backgroundColor: colors.shape,
   },
-  texto: {
-    color: colors.green_dark,
+  title: {
+    flex: 1,
+    marginLeft: 10,
     fontFamily: fonts.heading,
-    marginVertical: 16,
+    fontSize: 17,
+    color: colors.heading
   },
+  detail: {
+    alignItems: 'flex-end'
+  },
+  timeLabel: {
+    fontSize: 16,
+    fontFamily: fonts.text,
+    color: colors.body_light,
+  },
+  time: {
+    marginTop: 5,
+    fontSize: 16,
+    fontFamily: fonts.heading,
+    color: colors.body_dark,
+  }
 });

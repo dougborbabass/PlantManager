@@ -8,6 +8,7 @@ import { loadPlant, PlantProps } from '../libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import fonts from '../styles/fonts';
+import { PlantCardSecundary } from '../components/PlantCardPrimary';
 
 export function MyPlants() {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
@@ -52,7 +53,7 @@ export function MyPlants() {
           data={myPlants}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <Text> Teste </Text>
+            <PlantCardSecundary data={item} />
           )}
           showsVerticalScrollIndicator={false}
           // contentContainerStyle={{ flex: 1 }}
