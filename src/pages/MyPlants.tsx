@@ -8,7 +8,7 @@ import { loadPlant, PlantProps } from '../libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import fonts from '../styles/fonts';
-import { PlantCardSecundary } from '../components/PlantCardPrimary';
+import { PlantCardSecundary } from '../components/PlantCardSecundary';
 
 export function MyPlants() {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
