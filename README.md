@@ -55,3 +55,6 @@ $ expo start
 ### 💻 Projeto
 
 Projeto para você lembrar de sempre regar suas plantas 🌱
+
+
+![Badge](.github/app.gif)
