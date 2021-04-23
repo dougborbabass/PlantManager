@@ -39,26 +39,19 @@ $ json-server ./src/services/server.json --host 192.168.0.2 --port 3333
 
 💡 Você pode adicionar um --delay 1000 por exemplo para simular um carregamento e poder ver as animações de loading
 
-### Troco a url base no seu projeto
+
+### trocando a url base no seu projeto para direcionar para sua api local
 ```javascript
 const api = axios.create({
     baseURL: 'http://192.168.0.2:3333'
 })
 ```
 
-# Start do projeto
+### Start do projeto
+```bash
 $ expo start
 ```
 
-## 💻 Projeto
+### 💻 Projeto
 
 Projeto para você lembrar de sempre regar suas plantas 🌱
-
-## 🔖 Layout
-
-Você pode ver o layout seguido no desenvolvimento no link abaixo:
-
-- [Layout](https://www.figma.com/file/xRpYSK1O0cBdFnJ4Fq4Gwr/PlantManager?node-id=0%3A1) 
-
-lembrando, você deve ter uma conta no [Figma](http://figma.com/) para acessar o layout.
-
