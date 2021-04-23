@@ -61,6 +61,10 @@ export async function savePlant(plant: PlantProps): Promise<void> {
     const data = await AsyncStorage.getItem("@plantmanager:plants");
     const oldPlants = data ? (JSON.parse(data) as StoredPlantProps) : {};
 
+    if (oldPlants[plant.id]){
+      await Notifications.cancelScheduledNotificationAsync(oldPlants[plant.id].notificationId);
+    }
+
     const newPlant = {
       [plant.id]: {
         data: plant,
@@ -71,8 +75,8 @@ export async function savePlant(plant: PlantProps): Promise<void> {
     await AsyncStorage.setItem(
       "@plantmanager:plants",
       JSON.stringify({
-        ...newPlant,
         ...oldPlants,
+        ...newPlant,
       })
     );
   } catch (erro) {
